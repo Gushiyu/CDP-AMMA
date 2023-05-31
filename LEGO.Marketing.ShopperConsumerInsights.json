@@ -1,0 +1,117 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "description": "China CDP Tagging Open APIs",
+        "title": "China-CDP-Tagging-Open-API-Tags",
+        "version": "v1",
+        "x-application-id": "APP-02141",
+        "x-skip-gateway-infrastructure": true,
+        "x-audience": "external-partner"
+    },
+    "servers": [
+        {
+            "url": "https://cdp-tagging.lego.cn/-cdp-tagging/_open-api-adapter",
+            "description": "Generated server url"
+        }
+    ],
+    "tags": [
+        {
+            "name": "console 用的接口，均不经过缓存"
+        },
+        {
+            "name": "缓存 用的接口"
+        },
+        {
+            "name": "OnePortal 用的接口 v1"
+        }
+    ],
+    "paths": {
+        "/api/console/v1/metadata/user/tags": {
+            "get": {
+                "operationId": "listUserTag",
+                "parameters": [
+                    {
+                        "description": "经销商",
+                        "in": "query",
+                        "name": "partner",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Return"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    }
+                },
+                "summary": "01.获取经销商可用标签",
+                "security": [
+                    {
+                      "bearer": [
+                        "CNCDP"
+                      ]
+                    }
+                  ],
+                "tags": [
+                    "console 用的接口，均不经过缓存"
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "JSONObject": {
+                "type": "object",
+                "properties": {
+                    "empty": {
+                        "type": "boolean"
+                    },
+                    "innerMap": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "additionalProperties": {
+                    "type": "object"
+                },
+                "description": "分群筛选条件"
+            },
+            "Return": {
+                "title": "接口返回",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "title": "返回编码",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "返回数据",
+                        "type": "object"
+                    },
+                    "desc": {
+                        "title": "返回描述",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Authorization": {
+                "bearerFormat": "JWT",
+                "in": "header",
+                "scheme": "bearer",
+                "type": "http"
+            }
+        }
+    }
+}
